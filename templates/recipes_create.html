@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Recipes{% endblock %}
+
+
+{% block body %}
+
+<form action="" method="POST">
+    <input type="text" name="name" placeholder="Recipe name" />
+    <input type="checkbox" name="veggie" value=0 />
+    <input type="submit" value="submit" />
+</form>
+
+{%if error %}
+Entry already exists!
+{% endif %}
+
+
+{% endblock %}
