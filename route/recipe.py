@@ -1,6 +1,5 @@
 from flask import request, Blueprint
 from service.recipe import *
-from model.recipe import RecipeModel
 
 recipeApi = Blueprint('recipe', __name__)
 
@@ -26,3 +25,5 @@ def add_recipe():
         addRecipeToDatabase(request.json)
     except ValueError:
         return "Recipe already exists", 409
+    else:
+        return "Successfully added", 200
