@@ -28,8 +28,16 @@ with conn:
     def addIngredientsToDatabase(ingredients):
         for ingredient in ingredients:
             try:
-                c.execute("""INSERT INTO ingredients (name, amount, unit) VALUES(?, ?, ?)""",
-                          (ingredient.name, ingredient.amount, ingredient.unit))
-            except sqlite3.IntegrityError:
-                raise ValueError("Ingredient already exists")
+                addIngredientToDatabase(ingredient)
+            except ValueError as exception:
+                if str(exception) != "Ingredient already exists":
+                    raise ValueError(str(exception))
+
+    def addIngredientToDatabase(ingredient):
+        try:
+            c.execute("""INSERT INTO ingredients (name, unit) VALUES(?, ?)""",
+                      (ingredient.name, ingredient.unit))
+        except sqlite3.IntegrityError:
+            raise ValueError("Ingredient already exists")
+        ingredient.id = c.lastrowid
         conn.commit()

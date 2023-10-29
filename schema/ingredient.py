@@ -1,13 +1,12 @@
 from flask_marshmallow import Schema
-from marshmallow.fields import Str, Int
+from marshmallow.fields import Str
 
 
 class IngredientSchema(Schema):
     class Meta:
         # Fields to expose
-        fields = ["id", "name", "amount", "unit"]
+        fields = ["id", "name", "unit"]
 
     id = Str()
     name = Str()
-    amount = Int()
     unit = Str()

@@ -6,23 +6,23 @@ ingredientApi = Blueprint('ingredient', __name__)
 
 
 @ingredientApi.route("/ingredients/", methods=["GET"])
-def get_recipes():
+def get_ingredients():
     return getAllIngredientsFromDatabase()
 
 
 @ingredientApi.route("/ingredients/<ingredientId>", methods=["GET"])
-def get_recipe_id(ingredientId):
+def get_ingredient_id(ingredientId):
     return getIngredientFromDatabaseById(ingredientId)
 
 
 @ingredientApi.route("/ingredients/<ingredientName>", methods=["GET"])
-def get_recipe_name(ingredientName):
+def get_ingredient_name(ingredientName):
     return getIngredientFromDatabaseByName(ingredientName)
 
 
 @ingredientApi.route("/ingredients/", methods=["POST"])
 def addIngredients():
-    ingredients = [IngredientModel(None, ingredient.name, ingredient.amount, ingredient.unit)
+    ingredients = [IngredientModel(None, ingredient.name, ingredient.unit)
                    for ingredient in request.json]
     try:
         addIngredientsToDatabase(ingredients)
