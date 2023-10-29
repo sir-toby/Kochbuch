@@ -1,12 +1,13 @@
 from flask import request, Blueprint
 from service.recipe import *
+from model.recipe import RecipeModel
 
 recipeApi = Blueprint('recipe', __name__)
 
 
 @recipeApi.route("/recipes/", methods=["GET"])
 def get_recipes():
-    return getAllRecipesFromDatabases()
+    return getAllRecipesFromDatabase()
 
 
 @recipeApi.route("/recipes/<recipeId>", methods=["GET"])
@@ -22,10 +23,6 @@ def get_recipe_name(recipeName):
 @recipeApi.route("/recipes/", methods=["POST"])
 def add_recipe():
     try:
-        veggie = request.form["veggie"]
-    except:
-        veggie = False
-    try:
-        addRecipeToDatabase(RecipeModel(None, request.form["name"], veggie))
+        addRecipeToDatabase(request.json)
     except ValueError:
         return "Recipe already exists", 409

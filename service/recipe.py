@@ -20,14 +20,19 @@ with conn:
         recipe = RecipeModel(*c.fetchone())
         return recipe_schema.dump(recipe)
 
-    def getAllRecipesFromDatabases():
+    def getAllRecipesFromDatabase():
         c.execute("""SELECT * FROM recipes""")
         recipes = [RecipeModel(*recipe) for recipe in c.fetchall()]
         return recipes_schema.dump(recipes)
 
-    def addRecipeToDatabase(recipe: RecipeModel):
+    def addRecipeToDatabase(jsonRecipe):
+        try:
+            veggie = jsonRecipe["veggie"]
+        except:
+            veggie = False
+        recipe = RecipeModel(None, jsonRecipe["name"], veggie)
         try:
             c.execute("""INSERT INTO recipes (name, veggie) VALUES(?, ?)""", (recipe.name, recipe.veggie))
         except sqlite3.IntegrityError:
-            raise ValueError("Entry already exists")
+            raise ValueError("Recipe already exists")
         conn.commit()
