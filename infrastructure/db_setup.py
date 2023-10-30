@@ -6,23 +6,23 @@ c = conn.cursor()
 
 # Create recipes table
 c.execute("""CREATE TABLE recipes(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL UNIQUE,
+          recipeId INTEGER PRIMARY KEY,
+          recipeName TEXT NOT NULL UNIQUE,
           veggie INTEGER NOT NULL
           )""")
 conn.commit()
 
 # Create ingredients table
 c.execute("""CREATE TABLE ingredients(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL UNIQUE,
+          ingredientId INTEGER PRIMARY KEY,
+          ingredientName TEXT NOT NULL UNIQUE,
           unit TEXT NOT NULL
           )""")
 conn.commit()
 
 # Create relations table
 c.execute("""CREATE TABLE recipe_ingredient_relations(
-          id INTEGER PRIMARY KEY,
+          relationId INTEGER PRIMARY KEY,
           ingredientId INTEGER NOT NULL,
           recipeId INTEGER NOT NULL,
           amount INTEGER NOT NULL,

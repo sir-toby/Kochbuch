@@ -11,5 +11,4 @@ class RecipeSchema(Schema):
     id = Str()
     name = Str()
     veggie = Bool()
-    # ToDo: How to include amount?
     ingredients = Nested(IngredientSchema, many=True)

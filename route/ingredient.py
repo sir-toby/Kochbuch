@@ -7,24 +7,38 @@ ingredientApi = Blueprint('ingredient', __name__)
 
 @ingredientApi.route("/ingredients/", methods=["GET"])
 def get_ingredients():
-    return getAllIngredientsFromDatabase()
+    try:
+        allIngredients = getAllIngredients()
+    except:
+        return ValueError("Unknown technical error"), 500
+
+    return allIngredients, 200
 
 
 @ingredientApi.route("/ingredients/<ingredientId>", methods=["GET"])
 def get_ingredient_id(ingredientId):
-    return getIngredientFromDatabaseById(ingredientId)
+    try:
+        ingredient = getIngredientById(ingredientId)
+    except:
+        return ValueError("Unknown technial error"), 500
+    return ingredient, 200
 
 
+"""
 @ingredientApi.route("/ingredients/<ingredientName>", methods=["GET"])
 def get_ingredient_name(ingredientName):
-    return getIngredientFromDatabaseByName(ingredientName)
+    try:
+        ingredient = getIngredientByName(ingredientName)
+    except:
+        return ValueError("Unknown technical error"), 500
+    return ingredient, 200
+"""
 
 
 @ingredientApi.route("/ingredients/", methods=["POST"])
-def addIngredients():
-    req = request.json
-    ingredient = IngredientModel(None, req["name"], req["unit"])
+def add_ingredients():
     try:
-        addIngredientToDatabase(ingredient)
-    except ValueError:
-        return "Ingredient already exists", 409
+        ingredient = addIngredient(request.json)
+    except:
+        return ValueError("Unknown technical error"), 500
+    return ingredient, 200
