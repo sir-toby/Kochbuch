@@ -22,7 +22,7 @@ def get_recipe_name(recipeName):
 @recipeApi.route("/recipes/", methods=["POST"])
 def add_recipe():
     try:
-        addRecipeToDatabase(request.json)
+        addRecipe(request.json)
     except ValueError:
         return "Recipe already exists", 409
     else:

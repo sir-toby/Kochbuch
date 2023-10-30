@@ -6,7 +6,7 @@ class IngredientModel():
         self.unit = unit
 
     def __str__(self):
-        return self.id + ", " + self.name + ", " + ", " + self.unit
+        return self.name + ", " + self.unit
 
     def to_dict(self):
         return {'id': self.id, 'name': self.name, 'unit': self.unit}

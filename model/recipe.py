@@ -6,7 +6,7 @@ class RecipeModel():
         self.id = id
         self.name = name
         self.veggie = veggie
-        self.ingredients = [{IngredientModel(None, ingredient.name, ingredient.unit): ingredient.amount} for ingredient in ingredients]
+        self.ingredients = [{IngredientModel(None, ingredient["name"], ingredient["unit"]): ingredient["amount"]} for ingredient in ingredients]
 
     def __str__(self):
         return self.id + ", " + self.name + ", " + self.veggie

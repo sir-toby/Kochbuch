@@ -26,7 +26,23 @@ with conn:
         recipes = [RecipeModel(*recipe) for recipe in c.fetchall()]
         return recipes_schema.dump(recipes)
 
-    def addRecipeToDatabase(jsonRecipe):
+    def addRecipeToDatabase(recipe: RecipeModel):
+        try:
+            print(recipe.name)
+            c.execute("""INSERT INTO recipes (name, veggie) VALUES(?, ?)""", (recipe.name, recipe.veggie))
+        except sqlite3.IntegrityError:
+            raise ValueError("Recipe already exists")
+        return c.lastrowid()
+
+    def addRelationToDatabase(recipeId, ingredientId, amount):
+        try:
+            c.execute("""INSERT INTO recipe_ingredient_relations (ingredientId, recipeId, amount) VALUES(?, ?, ?)""",
+                      (ingredientId, recipeId, amount))
+        except sqlite3.IntegrityError:
+            raise ValueError("Relation already exists")
+        return c.lastrowid()
+
+    def addRecipe(jsonRecipe):
         try:
             veggie = jsonRecipe["veggie"]
         except:
@@ -47,18 +63,3 @@ with conn:
                 if str(exception) != "Relation already exists":
                     raise SyntaxError("Unknown error")
         conn.commit()
-
-    def addRecipeToDatabase(recipe):
-        try:
-            c.execute("""INSERT INTO recipes (name, veggie) VALUES(?, ?)""", (recipe.name, recipe.veggie))
-        except sqlite3.IntegrityError:
-            raise ValueError("Recipe already exists")
-        return c.lastrowid()
-
-    def addRelationToDatabase(recipeId, ingredientId, amount):
-        try:
-            c.execute("""INSERT INTO recipe_ingredient_relations (ingredientId, recipeId, amount) VALUES(?, ?, ?)""",
-                      (ingredientId, recipeId, amount))
-        except sqlite3.IntegrityError:
-            raise ValueError("Relation already exists")
-        return c.lastrowid()

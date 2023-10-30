@@ -22,9 +22,9 @@ def get_ingredient_name(ingredientName):
 
 @ingredientApi.route("/ingredients/", methods=["POST"])
 def addIngredients():
-    ingredients = [IngredientModel(None, ingredient.name, ingredient.unit)
-                   for ingredient in request.json]
+    req = request.json
+    ingredient = IngredientModel(None, req["name"], req["unit"])
     try:
-        addIngredientsToDatabase(ingredients)
+        addIngredientToDatabase(ingredient)
     except ValueError:
         return "Ingredient already exists", 409
