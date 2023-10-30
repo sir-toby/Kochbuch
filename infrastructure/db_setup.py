@@ -16,7 +16,6 @@ conn.commit()
 c.execute("""CREATE TABLE ingredients(
           id INTEGER PRIMARY KEY,
           name TEXT NOT NULL UNIQUE,
-          amount REAL NOT NULL,
           unit TEXT NOT NULL
           )""")
 conn.commit()

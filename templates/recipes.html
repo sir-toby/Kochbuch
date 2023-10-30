@@ -9,10 +9,11 @@
 
 <script>
 
-    let recipeList = recipes.json();
+    let response = await fetch('/recipes/search');
+    let recipes = await response.json();
     let html = '';
-    for (let recipe in recipeList) {
-        html += '<li>' + recipeList[recipe].name + '</li>';
+    for (let recipe in recipes) {
+        html += '<li>' + recipes[recipe].name + '</li>';
     }
     document.querySelector('ul').innerHTML = html;
 </script>
