@@ -1,4 +1,3 @@
-
 from flask import Flask
 from route.recipe import recipeApi
 from route.ingredient import ingredientApi

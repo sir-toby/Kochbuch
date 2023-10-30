@@ -32,7 +32,7 @@ with conn:
             c.execute("""INSERT INTO recipes (name, veggie) VALUES(?, ?)""", (recipe.name, recipe.veggie))
         except sqlite3.IntegrityError:
             raise ValueError("Recipe already exists")
-        return c.lastrowid()
+        return c.lastrowid
 
     def addRelationToDatabase(recipeId, ingredientId, amount):
         try:
@@ -40,7 +40,7 @@ with conn:
                       (ingredientId, recipeId, amount))
         except sqlite3.IntegrityError:
             raise ValueError("Relation already exists")
-        return c.lastrowid()
+        return c.lastrowid
 
     def addRecipe(jsonRecipe):
         try:
@@ -56,9 +56,13 @@ with conn:
         recipe.id = addRecipeToDatabase(recipe)
 
         # Add relations
-        for ingredient in recipe.ingredients:
+        for ingredient_dict in recipe.ingredients:
+            for i in ingredient_dict:
+                ingredient = i
+                amount = ingredient_dict[i]
+            print(ingredient, amount)
             try:
-                addRelationToDatabase(recipe.id, ingredient.id, recipe.ingredients[ingredient])
+                addRelationToDatabase(recipe.id, ingredient.id, amount)
             except ValueError as exception:
                 if str(exception) != "Relation already exists":
                     raise SyntaxError("Unknown error")
