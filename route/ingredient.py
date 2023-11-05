@@ -40,5 +40,5 @@ def add_ingredients():
     try:
         ingredient = addIngredient(request.json)
     except:
-        return ValueError("Unknown technical error"), 500
+        return "Unknown technical error", 500
     return ingredient, 200

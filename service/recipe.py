@@ -1,4 +1,5 @@
 from model.recipe import RecipeModel
+from model.ingredientForRecipe import IngredientForRecipeModel
 from model.ingredient import IngredientModel
 from schema.recipe import RecipeSchema
 
@@ -24,11 +25,11 @@ def addRecipe(jsonRecipe):
     except:
         veggie = False
     recipe = RecipeModel(None, jsonRecipe["name"], veggie,
-                         {IngredientModel(None, ingredient["name"], ingredient["unit"]): ingredient["amount"]
-                          for ingredient in jsonRecipe["ingredients"]})
+                         [IngredientForRecipeModel(IngredientModel(None, ingredient["name"], ingredient["unit"]), ingredient["amount"])
+                          for ingredient in jsonRecipe["ingredients"]])
 
     try:
         recipe.add()
     except:
         raise ValueError("Unknown error")
-    return recipe_schema.dump(recipe.add())
+    return recipe_schema.dump(recipe)

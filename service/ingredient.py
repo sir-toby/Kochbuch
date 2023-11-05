@@ -23,4 +23,4 @@ def addIngredient(ingredientJson):
         ingredient.add()
     except:
         raise ValueError("Unknown error")
-    return ingredients_schema.dump(ingredient)
+    return ingredient_schema.dump(ingredient)

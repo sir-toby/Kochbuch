@@ -1,4 +1,5 @@
 from model.ingredient import IngredientModel
+from model.ingredientForRecipe import IngredientForRecipeModel
 import sqlite3
 
 conn = sqlite3.connect('recipes.sqlite3', check_same_thread=False)
@@ -27,8 +28,8 @@ class RecipeModel():
                     LEFT JOIN ingredients on relations.ingredientId=ingredients.ingredientId
                     WHERE recipes.recipeName = ? """, (name,))
             rows = [dict(row) for row in c.fetchall()]
-        ingredients = {IngredientModel(row["ingredientId"], row["ingredientName"],
-                                       row["unit"]): row["amount"] for row in rows}
+        ingredients = [IngredientForRecipeModel(IngredientModel(row["ingredientId"], row["ingredientName"],
+                                                                row["unit"]), row["amount"]) for row in rows]
         return RecipeModel(rows[0]['recipeId'], rows[0]['recipeName'], rows[0]['veggie'], ingredients)
 
     @classmethod
@@ -41,8 +42,8 @@ class RecipeModel():
                     LEFT JOIN ingredients on relations.ingredientId=ingredients.ingredientId
                     WHERE recipes.recipeId = ? """, (recipeId,))
             rows = [dict(row) for row in c.fetchall()]
-        ingredients = {IngredientModel(row["ingredientId"], row["ingredientName"],
-                                       row["unit"]): row["amount"] for row in rows}
+        ingredients = [IngredientForRecipeModel(IngredientModel(row["ingredientId"], row["ingredientName"],
+                                                                row["unit"]), row["amount"]) for row in rows]
         recipe = RecipeModel(rows[0]["recipeId"], rows[0]["recipeName"], rows[0]["veggie"], ingredients)
         return recipe
 
@@ -64,7 +65,7 @@ class RecipeModel():
             self.id = c.lastrowid
             return self
 
-    def addRelation(recipeId, ingredientId, amount):
+    def addRelation(self, recipeId, ingredientId, amount):
         with conn:
             c = conn.cursor()
             try:
@@ -76,12 +77,13 @@ class RecipeModel():
 
     def add(self):
         # Add ingredients
-        for ingredient in self.ingredients:
+        for recipeIngredient in self.ingredients:
+            ingredient = recipeIngredient.ingredient
             try:
                 ingredient.add()
             except ValueError as e:
                 if str(e) == "Ingredient already exists":
-                    ingredient = ingredient.getByName(ingredient.name)
+                    recipeIngredient.ingredient = ingredient.getByName(ingredient.name)
             except:
                 ValueError("Unknown error")
 
@@ -90,9 +92,9 @@ class RecipeModel():
             self.addRecipeEntity()
 
             # Add relations
-            for ingredient in self.ingredients:
+            for ingredientForRecipe in self.ingredients:
                 try:
-                    self.addRelation(self.id, ingredient.id, self.ingredients[ingredient])
+                    self.addRelation(self.id, ingredientForRecipe.ingredient.id, ingredientForRecipe.amount)
                 except ValueError as exception:
                     if str(exception) != "Relation already exists":
                         raise SyntaxError("Unknown error")

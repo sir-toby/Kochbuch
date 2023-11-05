@@ -8,6 +8,7 @@ with conn:
     # Recipes
     c.execute("""INSERT INTO recipes (recipeName, veggie) VALUES(?, ?)""", ("Röstischnitzel", False))
     c.execute("""INSERT INTO recipes (recipeName, veggie) VALUES(?, ?)""", ("Gemüsecurry", True))
+
     # Ingredients
     c.execute("""INSERT INTO ingredients (ingredientName, unit) VALUES(?, ?)""", ("Berner Rösti", "g"))
     c.execute("""INSERT INTO ingredients (ingredientName, unit) VALUES(?, ?)""", ("Putenbrust", "g"))
