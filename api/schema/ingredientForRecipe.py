@@ -1,6 +1,6 @@
 from flask_marshmallow import Schema
 from marshmallow.fields import Float, Nested
-from schema.ingredient import IngredientSchema
+from api.schema.ingredient import IngredientSchema
 
 
 class IngredientForRecipeSchema(Schema):

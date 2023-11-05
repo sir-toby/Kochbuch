@@ -1,7 +1,8 @@
 import sqlite3
+from os import getcwd
 
 # Connect to database
-conn = sqlite3.connect('../recipes.sqlite3')
+conn = sqlite3.connect(getcwd() + '/recipes.sqlite3')
 c = conn.cursor()
 
 # Create recipes table

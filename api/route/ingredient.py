@@ -1,6 +1,5 @@
 from flask import request, Blueprint
-from service.ingredient import *
-from model.ingredient import IngredientModel
+from api.service.ingredient import *
 
 ingredientApi = Blueprint('ingredient', __name__)
 
@@ -10,7 +9,7 @@ def get_ingredients():
     try:
         allIngredients = getAllIngredients()
     except:
-        return ValueError("Unknown technical error"), 500
+        return "Unknown technical error", 500
 
     return allIngredients, 200
 
@@ -20,7 +19,7 @@ def get_ingredient_id(ingredientId):
     try:
         ingredient = getIngredientById(ingredientId)
     except:
-        return ValueError("Unknown technial error"), 500
+        return "Unknown technial error", 500
     return ingredient, 200
 
 

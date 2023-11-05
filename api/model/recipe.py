@@ -1,5 +1,5 @@
-from model.ingredient import IngredientModel
-from model.ingredientForRecipe import IngredientForRecipeModel
+from api.model.ingredient import IngredientModel
+from api.model.ingredientForRecipe import IngredientForRecipeModel
 import sqlite3
 
 conn = sqlite3.connect('recipes.sqlite3', check_same_thread=False)

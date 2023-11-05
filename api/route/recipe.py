@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from service.recipe import *
+from api.service.recipe import *
 
 recipeApi = Blueprint('recipe', __name__)
 

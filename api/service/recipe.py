@@ -1,7 +1,7 @@
-from model.recipe import RecipeModel
-from model.ingredientForRecipe import IngredientForRecipeModel
-from model.ingredient import IngredientModel
-from schema.recipe import RecipeSchema
+from api.model.recipe import RecipeModel
+from api.model.ingredientForRecipe import IngredientForRecipeModel
+from api.model.ingredient import IngredientModel
+from api.schema.recipe import RecipeSchema
 
 recipe_schema = RecipeSchema()
 recipes_schema = RecipeSchema(many=True)

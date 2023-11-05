@@ -1,5 +1,5 @@
-from model.ingredient import IngredientModel
-from schema.ingredient import IngredientSchema
+from api.model.ingredient import IngredientModel
+from api.schema.ingredient import IngredientSchema
 
 ingredient_schema = IngredientSchema()
 ingredients_schema = IngredientSchema(many=True)

@@ -1,6 +1,6 @@
 from flask import Flask
-from route.recipe import recipeApi
-from route.ingredient import ingredientApi
+from api.route.recipe import recipeApi
+from api.route.ingredient import ingredientApi
 
 
 def create_app():
