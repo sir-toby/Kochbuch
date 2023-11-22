@@ -85,12 +85,18 @@ class RecipeModel():
                 if str(e) == "Ingredient already exists":
                     recipeIngredient.ingredient = ingredient.getByName(ingredient.name)
             except:
-                ValueError("Unknown error")
+                SyntaxError("Unknown error")
 
         with conn:
             # Add recipe
-            self.addRecipeEntity()
-
+            try: 
+                self.addRecipeEntity()
+            except ValueError as exception: 
+                if str(exception) == "Recipe already exists": 
+                    raise ValueError("Recipe already exists")
+            except: 
+                raise SyntaxError("Unknown error")
+            
             # Add relations
             for ingredientForRecipe in self.ingredients:
                 try:

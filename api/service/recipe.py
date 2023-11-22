@@ -30,6 +30,11 @@ def addRecipe(jsonRecipe):
 
     try:
         recipe.add()
-    except:
-        raise ValueError("Unknown error")
+    except ValueError as e:
+        if str(e) == "Recipe already exists":
+            raise ValueError("Recipe already exists")
+        else: 
+            raise SyntaxError("Unknown technical error")
+    except: 
+        raise SyntaxError("Unknown technical error")
     return recipe_schema.dump(recipe)

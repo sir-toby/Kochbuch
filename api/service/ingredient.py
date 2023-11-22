@@ -10,8 +10,12 @@ def getIngredientByName(name):
 
 
 def getIngredientById(ingredientId):
-    return ingredient_schema.dump(IngredientModel.getById(ingredientId))
-
+    try:
+        return ingredient_schema.dump(IngredientModel.getById(ingredientId))
+    except NameError:
+        raise NameError("Entry not found")
+    except: 
+        raise Exception
 
 def getAllIngredients():
     return ingredients_schema.dump(IngredientModel.getAll())
@@ -21,6 +25,9 @@ def addIngredient(ingredientJson):
     ingredient = IngredientModel(None, ingredientJson["name"], ingredientJson["unit"])
     try:
         ingredient.add()
+    except ValueError:
+        return ingredient_schema.dump(ingredient.getByName(ingredient.name))
     except:
-        raise ValueError("Unknown error")
+        raise TypeError("Unknown error")
+    print(ingredient_schema.dump(ingredient))
     return ingredient_schema.dump(ingredient)

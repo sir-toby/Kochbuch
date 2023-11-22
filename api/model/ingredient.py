@@ -12,22 +12,22 @@ class IngredientModel():
     def __str__(self):
         return self.name + ", " + self.unit
 
-    def to_dict(self):
-        return {'id': self.id, 'name': self.name, 'unit': self.unit}
-
     @classmethod
     def getByName(cls, name):
         with conn:
             c = conn.cursor()
             c.execute("""SELECT * FROM ingredients WHERE ingredientName = ?""", (name,))
-            return IngredientModel(*c.fetchone())
+            try: return IngredientModel(*c.fetchone())
+            except: raise NameError("Entry not found")
 
     @classmethod
     def getById(cls, ingredientId):
         with conn:
             c = conn.cursor()
             c.execute("""SELECT * FROM ingredients WHERE ingredientId = ?""", (ingredientId,))
-            return IngredientModel(*c.fetchone())
+            try: return IngredientModel(*c.fetchone())
+            except: raise NameError("Entry not found")
+            
 
     @classmethod
     def getAll(cls):

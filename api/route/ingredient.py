@@ -18,8 +18,10 @@ def get_ingredients():
 def get_ingredient_id(ingredientId):
     try:
         ingredient = getIngredientById(ingredientId)
+    except NameError:
+        return "Ingredient not found", 404
     except:
-        return "Unknown technial error", 500
+        return "Unknown technical error", 500
     return ingredient, 200
 
 
@@ -38,6 +40,9 @@ def get_ingredient_name(ingredientName):
 def add_ingredients():
     try:
         ingredient = addIngredient(request.json)
+        print(ingredient)
+    except ValueError:
+        return "Ingredient already exists", 409
     except:
         return "Unknown technical error", 500
     return ingredient, 200

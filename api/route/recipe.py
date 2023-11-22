@@ -17,6 +17,8 @@ def get_recipes():
 def get_recipe_id(recipeId):
     try:
         recipe = getRecipeById(recipeId)
+    except NameError: 
+        return "Recipe not found", 404
     except:
         return "Unknown technical error", 500
     return recipe, 200
@@ -35,6 +37,11 @@ def get_recipe_name(recipeName):
 def add_recipe():
     try:
         recipe = addRecipe(request.json)
-    except:
+    except ValueError as e:
+        if str(e) == "Recipe already exists": 
+            return "Recipe already exists", 409
+        
+        else: return "Unknown technical error", 500
+    except: 
         return "Unknown technical error", 500
     return recipe, 200
