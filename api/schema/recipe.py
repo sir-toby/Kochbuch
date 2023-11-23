@@ -1,6 +1,6 @@
 from flask_marshmallow import Schema
-from marshmallow.fields import Str, Bool, Nested
-from schema.ingredient import IngredientSchema
+from marshmallow.fields import Str, Bool, Nested, Mapping, Float
+from api.schema.ingredientForRecipe import IngredientForRecipeSchema
 
 
 class RecipeSchema(Schema):
@@ -11,5 +11,4 @@ class RecipeSchema(Schema):
     id = Str()
     name = Str()
     veggie = Bool()
-    # ToDo: How to include amount?
-    ingredients = Nested(IngredientSchema, many=True)
+    ingredients = Nested(IngredientForRecipeSchema, many=True)
