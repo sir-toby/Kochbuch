@@ -2,8 +2,8 @@ import sqlite3
 from os import getcwd
 
 # Connect to database
-def create_database(databaseName):
-    conn = sqlite3.connect(getcwd() + '/' + databaseName)
+def create_database(conn):
+    
     c = conn.cursor()
 
     # Create recipes table
@@ -29,11 +29,13 @@ def create_database(databaseName):
             recipeId INTEGER NOT NULL,
             amount INTEGER NOT NULL,
             FOREIGN KEY(ingredientId) REFERENCES ingredients(id),
-            FOREIGN KEY(recipeId) REFERENCES recipes(id)
+            FOREIGN KEY(recipeId) REFERENCES recipes(id),
+            CONSTRAINT unique_relation UNIQUE(ingredientId, recipeId)
             )""")
     conn.commit()
 
-    conn.close()
 
 if __name__ == "__main__":
-    create_database('recipes.sqlite3')
+    conn = sqlite3.connect(getcwd() + '/recipes.sqlite3')
+    create_database(conn)
+    conn.close()
