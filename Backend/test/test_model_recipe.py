@@ -197,7 +197,7 @@ class TestDatabaseQueries():
                     LEFT JOIN recipe_ingredient_relations relations on recipes.recipeId=relations.recipeId
                     LEFT JOIN ingredients on relations.ingredientId=ingredients.ingredientId
                     WHERE recipes.recipeId = ? """, (1,) )
-    
+                
     def test_query_get_all(self, mocker):
         mock_conn, mock_cursor, mock_execute = dbMock([(1, "Test Recipe", True)], mocker)  
         try: RecipeModel.getAll(mock_conn)
