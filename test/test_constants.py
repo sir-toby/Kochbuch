@@ -20,6 +20,7 @@ testIngredientForRecipeModel3 = IngredientForRecipeModel(testIngredientModel3, 5
 
 testRecipeModel = RecipeModel(1, "Test", False, [testIngredientForRecipeModel, testIngredientForRecipeModel2])
 testRecipeModel2 = RecipeModel(None, "Test2", False, [testIngredientForRecipeModel2, testIngredientForRecipeModel3])
+testRecipeModel3 = RecipeModel(None, "awefhifdlfk", False, [testIngredientForRecipeModel2, testIngredientForRecipeModel3])
 
 testJsonRecipe2 = {"id": "1", "name": "Test2", "veggie": "False", "ingredients": [{"id": None, "name": "test2", "unit": "pcs", "amount": 199}, {"id": None, "name": "test3", "unit": "mL", "amount": 5}]}
 

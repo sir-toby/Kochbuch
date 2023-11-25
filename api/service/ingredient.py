@@ -29,5 +29,4 @@ def addIngredient(ingredientJson):
         return ingredient_schema.dump(ingredient.getByName(ingredient.name))
     except:
         raise TypeError("Unknown error")
-    print(ingredient_schema.dump(ingredient))
     return ingredient_schema.dump(ingredient)
