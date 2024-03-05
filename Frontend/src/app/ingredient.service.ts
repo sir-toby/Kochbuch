@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ingredient } from './ingredient';
-import { INGREDIENTS } from './mock-ingredients';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 
 
 @Injectable({
@@ -11,9 +10,23 @@ import { Observable, catchError, of } from 'rxjs';
 export class IngredientService {
 
   private ingredientsUrl = '/api/ingredients/'
+
+  log(logString: string): void {
+    console.log(logString)
+  }
+
+
   getIngredients(): Observable<Ingredient[]> {
     return this.http.get<Ingredient[]>(this.ingredientsUrl).pipe(
+      tap(_ => this.log(`successfully fetched ${_.length} ingredients`)),
       catchError(this.handleError<Ingredient[]>('getIngredients', []))
+    )
+  }
+
+  getIngredient(id: number): Observable<Ingredient> {
+    return this.http.get<Ingredient>(`${this.ingredientsUrl}/${id}`).pipe(
+      tap(_ => this.log(`successfully fetched ingredient with id ${id}`)),
+      catchError(this.handleError<Ingredient>(`getIngredient id=${id}`))
     )
   }
 
