@@ -15,7 +15,7 @@ export class IngredientDetailComponent implements OnInit {
   constructor(
     private ingredientService: IngredientService,
     private route: ActivatedRoute
-    ) {};
+    ) {}
 
   getIngredient(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10)
