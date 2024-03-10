@@ -1,8 +1,13 @@
-<h2>Recipes</h2>
-<div class="ingredient-list">
+<div class="header container-fluid">
+    <div class="d-flex justify-content-between">
+        <div class="h2">Recipes</div>
+        <div><a class="btn btn-primary" routerLink="add" role="button">Add recipe</a></div>
+    </div>
+</div>
+<div class="recipe-list">
     <ul>
-    <li *ngFor="let recipe of recipes">
-        <a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a>
-    </li>
-</ul>
+        <li *ngFor="let recipe of recipes">
+            <a routerLink="/recipes/{{recipe.id}}">{{recipe.name}}</a>
+        </li>
+    </ul>
 </div>

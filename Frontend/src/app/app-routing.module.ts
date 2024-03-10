@@ -7,7 +7,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/ingredients', pathMatch: 'full' },
+  {path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {path: 'ingredients', component: IngredientsComponent},
   {path: 'ingredients/:id', component: IngredientDetailComponent},
   {path: 'recipes', component: RecipesComponent},
