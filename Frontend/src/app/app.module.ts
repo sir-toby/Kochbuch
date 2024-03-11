@@ -7,18 +7,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { IngredientDetailComponent } from './ingredient-detail/ingredient-detail.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     IngredientsComponent,
-    IngredientDetailComponent
+    IngredientDetailComponent,
+    RecipesComponent,
+    RecipeDetailComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../ingredient';
 import { IngredientService } from '../ingredient.service';
 
@@ -7,10 +7,10 @@ import { IngredientService } from '../ingredient.service';
   templateUrl: './ingredients.component.html',
   styleUrl: './ingredients.component.css'
 })
-export class IngredientsComponent {
+export class IngredientsComponent implements OnInit{
   ingredients:Ingredient[] = [];
 
-  constructor(private ingredientService: IngredientService) {};
+  constructor(private ingredientService: IngredientService) {}
 
   getIngredients(): void {
     this.ingredientService.getIngredients().subscribe(ingredients => this.ingredients = ingredients)
