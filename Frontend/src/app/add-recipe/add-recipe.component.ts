@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { IngredientForRecipe } from '../ingredient-for-recipe';
-
 
 @Component({
   selector: 'app-add-recipe',
@@ -10,16 +9,21 @@ import { IngredientForRecipe } from '../ingredient-for-recipe';
   styleUrl: './add-recipe.component.css',
 
 })
-export class AddRecipeComponent {
-  constructor(private recipeService: RecipeService) { }
+export class AddRecipeComponent implements OnInit {
+  constructor(
+    private recipeService: RecipeService) { }
 
-  recipe: Recipe = {
-    name: "",
-    veggie: false,
-    ingredients: [this.generateEmptyIngredient()]
+  public recipe!: Recipe;
+
+  initializeRecipe(): void {
+    this.recipe = {
+      name: "",
+      veggie: false,
+      ingredients: [this.addEmptyIngredient()]
+    }
   }
 
-  generateEmptyIngredient(): IngredientForRecipe {
+  addEmptyIngredient(): IngredientForRecipe {
     return {
       ingredient: {
         name: "",
@@ -29,19 +33,24 @@ export class AddRecipeComponent {
     }
   }
 
-
   addRow(): void {
-    this.recipe.ingredients.push(this.generateEmptyIngredient())
+    this.recipe.ingredients.push(this.addEmptyIngredient())
   }
 
-  removeRow(): void {
+  removeIngredient(): void {
     this.recipe.ingredients.pop()
   }
 
   addRecipe(): void {
-    // if (!this.recipe.name && !this.recipe.ingredients[0].ingredient.name) {return; }
+    if (!this.recipe.name && !this.recipe.ingredients[0].ingredient.name) { return; }
 
     console.log(this.recipe)
-    this.recipeService.addRecipe(this.recipe).subscribe(newRecipe => this.recipe = newRecipe)
+    this.recipeService.addRecipe(this.recipe).subscribe()
+    this.initializeRecipe();
+
+  }
+
+  ngOnInit(): void {
+    this.initializeRecipe();
   }
 }
