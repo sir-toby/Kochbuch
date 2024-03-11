@@ -25,7 +25,7 @@ def addRecipe(jsonRecipe):
     except:
         veggie = False
     recipe = RecipeModel(None, jsonRecipe["name"], veggie,
-                         [IngredientForRecipeModel(IngredientModel(None, ingredient["name"], ingredient["unit"]), ingredient["amount"])
+                         [IngredientForRecipeModel(IngredientModel(None, ingredient["ingredient"]["name"], ingredient["ingredient"]["unit"]), ingredient["amount"])
                           for ingredient in jsonRecipe["ingredients"]])
 
     try:
