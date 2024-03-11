@@ -1,0 +1,26 @@
+name: check-test-success
+run-name: Check if all tests are successful
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+jobs:
+  check-pytest-success:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with pytest
+        run: |
+          pip install pytest pytest-cov
+          pytest  --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+      - name: Upload pytest test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: junit/test-results.xml
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
