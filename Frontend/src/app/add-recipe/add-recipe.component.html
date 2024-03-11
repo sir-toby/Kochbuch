@@ -1,54 +1,77 @@
 <div class="container-fluid py-3">
-    <div class="row my-3">
-        <div class="col">
-            <label for="recipeName" class="form-label">Name</label>
-            <input type="text" class="form-control form-control-sm" id="recipeName" [(ngModel)]="recipe.name"
-                placeholder="Rezeptname">
-        </div>
+  <div class="row my-3">
+    <div class="col">
+      <label for="recipeName" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="recipeName"
+        [(ngModel)]="recipe.name"
+        placeholder="Rezeptname"
+      />
     </div>
-    <div class="row my-3">
-        <div class="col">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="isRecipeVegetarian" [(ngModel)]="recipe.veggie">
-                <label class="form-check-label" for="isRecipeVegetarian">Vegetarisch</label>
-            </div>
-        </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="isRecipeVegetarian"
+          [(ngModel)]="recipe.veggie"
+        />
+        <label class="form-check-label" for="isRecipeVegetarian"
+          >Vegetarisch</label
+        >
+      </div>
     </div>
-    <div class="row my-3">
-        <div class="col">
-            <h2>Ingredients</h2>
-            <table class="table" id="ingredientsTable">
-                <thead>
-                    <th scope="col">
-                        Name
-                    </th>
-                    <th scope="col">
-                        Amount
-                    </th>
-                    <th scope="col">
-                        Unit
-                    </th>
-                </thead>
-                <tr *ngFor="let ingredient of recipe.ingredients">
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="ingredientName"
-                            [(ngModel)]="ingredient.ingredient.name" placeholder="Zutat">
-                    </td>
-                    <td>
-                        <input type="number" class="form-control form-control-sm" id="ingredientAmount"
-                            [(ngModel)]="ingredient.amount" placeholder="Menge">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm" id="ingredientUnit"
-                            [(ngModel)]="ingredient.ingredient.unit" placeholder="Einheit">
-                    </td>
-                </tr>
-                <tr>
-                    <button type="button" (click)="addRow()">Zutat hinzufügen</button>
-                </tr>
-            </table>
-        </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <h2>Ingredients</h2>
+      <table class="table" id="ingredientsTable">
+        <thead>
+          <th scope="col">Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Unit</th>
+        </thead>
+        <tr *ngFor="let ingredient of recipe.ingredients">
+          <td>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="ingredientName"
+              [(ngModel)]="ingredient.ingredient.name"
+              placeholder="Zutat"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              id="ingredientAmount"
+              [(ngModel)]="ingredient.amount"
+              placeholder="Menge"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="ingredientUnit"
+              [(ngModel)]="ingredient.ingredient.unit"
+              placeholder="Einheit"
+            />
+          </td>
+        </tr>
+        <tr>
+          <button type="button" (click)="addRow()">Zutat hinzufügen</button>
+        </tr>
+      </table>
     </div>
+  </div>
 
-    <button class=" btn btn-primary" type="submit" (click)="addRecipe()">Speichern</button>
+  <button class="btn btn-primary" type="submit" (click)="addRecipe()">
+    Speichern
+  </button>
 </div>

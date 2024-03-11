@@ -43,7 +43,6 @@ export class RecipeService {
       tap((newRecipe: Recipe) => this.log(`added recipe w/ id=${newRecipe.id}`)),
       catchError(this.handleError<Recipe>('addRecipe'))
     );
-
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

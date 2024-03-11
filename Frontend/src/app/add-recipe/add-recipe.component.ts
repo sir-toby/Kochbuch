@@ -11,7 +11,7 @@ import { IngredientForRecipe } from '../ingredient-for-recipe';
 
 })
 export class AddRecipeComponent {
-  constructor(private recipeService: RecipeService) { };
+  constructor(private recipeService: RecipeService) { }
 
   recipe: Recipe = {
     name: "",
