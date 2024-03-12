@@ -59,6 +59,7 @@ export class RecipeService {
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
+      this.toastService.addToast('Failure', 'Recipe could not be created', this.toastType.Failure)
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
