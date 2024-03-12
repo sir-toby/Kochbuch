@@ -1,1 +1,18 @@
-<p>toast works!</p>
+<button class="btn btn-primary" (click)="createToast()">Example toast</button>
+
+<div *ngFor="let toast of toastService.toasts">
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <ngb-toast class="toast" role="alert" [autohide]="false">
+      <div class="toast-header">
+        <strong class="me-auto">{{ toast.title }}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="toast-body">{{ toast.message }}</div>
+    </ngb-toast>
+  </div>
+</div>

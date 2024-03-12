@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { Recipe } from './recipe';
+import { ToastService } from './toast.service';
+import { ToastType } from './toast';
 
 
 @Injectable({
@@ -16,7 +18,10 @@ export class RecipeService {
 
   constructor(
     private http: HttpClient,
+    private toastService: ToastService
   ) { }
+
+  public toastType = ToastType
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,6 +46,7 @@ export class RecipeService {
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>(this.recipeUrl, recipe, this.httpOptions).pipe(
       tap((newRecipe: Recipe) => this.log(`added recipe w/ id=${newRecipe.id}`)),
+      tap(_ => this.toastService.addToast('Success', `Recipe ${_.name} successfully added`, this.toastType.Success)),
       catchError(this.handleError<Recipe>('addRecipe'))
     );
   }
