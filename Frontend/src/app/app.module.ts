@@ -11,6 +11,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { FormsModule } from '@angular/forms';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     IngredientDetailComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
