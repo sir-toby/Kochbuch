@@ -1,8 +1,24 @@
-<button class="btn btn-primary" (click)="createToast()">Example toast</button>
-
-<div *ngFor="let toast of toastService.toasts">
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <ngb-toast class="toast" role="alert" [autohide]="false">
+<div class="d-none">
+  <button class="btn btn-primary" (click)="createToast('success')">
+    Example success toast
+  </button>
+  <button class="btn btn-primary" (click)="createToast('warning')">
+    Example warning toast
+  </button>
+  <button class="btn btn-primary" (click)="createToast('failure')">
+    Example failure toast
+  </button>
+  <button class="btn btn-primary" (click)="createToast('info')">
+    Example info toast
+  </button>
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div *ngFor="let toast of toastService.toasts">
+    <ngb-toast
+      class="toast my-2 {{ toastType[toast.type] }}"
+      role="alert"
+      [autohide]="false"
+    >
       <div class="toast-header">
         <strong class="me-auto">{{ toast.title }}</strong>
         <button

@@ -9,10 +9,22 @@ import { ToastType } from '../toast';
 })
 export class ToastComponent {
   constructor(public toastService: ToastService) { }
-  private toastType = ToastType;
+  public toastType = ToastType;
 
-  createToast(): void {
-    this.toastService.addToast("Test", "this is a testmessage", this.toastType.Success)
-
+  createToast(type: string): void {
+    switch (type) {
+      case "success":
+        this.toastService.addToast(type, "this is a testmessage", this.toastType.success);
+        break;
+      case "warning":
+        this.toastService.addToast(type, "this is a testmessage", this.toastType.warning);
+        break;
+      case "failure":
+        this.toastService.addToast(type, "this is a testmessage", this.toastType.failure);
+        break;
+      case "info":
+        this.toastService.addToast(type, "this is a testmessage", this.toastType.info);
+        break;
+    }
   }
 }

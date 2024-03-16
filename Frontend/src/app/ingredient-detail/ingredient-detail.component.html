@@ -1,14 +1,16 @@
-<div class="ingredient">
-  <table class="table">
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Unit</th>
-    </tr>
-    <tr *ngIf="ingredient">
-      <td>{{ ingredient.id }}</td>
-      <td>{{ ingredient.name }}</td>
-      <td>{{ ingredient.unit }}</td>
-    </tr>
-  </table>
+<div class="header container-fluid">
+  <div class="ingredient">
+    <table class="table">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Unit</th>
+      </tr>
+      <tr *ngIf="ingredient">
+        <td>{{ ingredient.id }}</td>
+        <td>{{ ingredient.name }}</td>
+        <td>{{ ingredient.unit }}</td>
+      </tr>
+    </table>
+  </div>
 </div>

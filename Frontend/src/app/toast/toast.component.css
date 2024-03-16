@@ -1,0 +1,28 @@
+.toast {
+    --bs-toast-padding-x: 0rem;
+    --bs-toast-padding-y: 0rem;
+}
+
+.toast-header {
+    --bs-toast-padding-x: 0.75rem;
+    --bs-toast-padding-y: 0.5rem;
+    --bs-toast-header-bg: rgba(255, 255, 255, 0.5);
+}
+
+.toast-body {
+    --bs-toast-padding-x: 0.75rem;
+    --bs-toast-padding-y: 0.5rem;
+}
+.failure {
+    --bs-toast-bg: rgba(255, 200, 200, 0.85);
+}
+.success {
+    --bs-toast-bg: rgba(200, 255, 200, 0.85);
+}
+
+.warning {
+    --bs-toast-bg: rgba(255, 255, 200, 0.85);
+}
+.info {
+    --bs-toast-bg: rgba(200, 200, 255, 0.85);
+}

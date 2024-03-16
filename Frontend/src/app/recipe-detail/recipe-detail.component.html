@@ -1,22 +1,24 @@
-<div *ngIf="recipe" class="recipe-detail">
-  <h1>{{ recipe.name }}</h1>
-  <p *ngIf="recipe.veggie"><i>vegetarian</i></p>
-  <table class="table">
-    <tr>
-      <th>Ingredient</th>
-      <th>Amount</th>
-      <th>Unit</th>
-    </tr>
-    <tr *ngFor="let ingredient of recipe.ingredients">
-      <td>
-        <a routerLink="/ingredients/{{ ingredient.ingredient.id }}">{{
-          ingredient.ingredient.name
-        }}</a>
-      </td>
-      <td>
-        {{ ingredient.amount }}
-      </td>
-      <td>{{ ingredient.ingredient.unit }}</td>
-    </tr>
-  </table>
+<div class="header container-fluid">
+  <div *ngIf="recipe" class="recipe-detail">
+    <h1>{{ recipe.name }}</h1>
+    <p *ngIf="recipe.veggie"><i>vegetarian</i></p>
+    <table class="table">
+      <tr>
+        <th>Ingredient</th>
+        <th>Amount</th>
+        <th>Unit</th>
+      </tr>
+      <tr *ngFor="let ingredient of recipe.ingredients">
+        <td>
+          <a routerLink="/ingredients/{{ ingredient.ingredient.id }}">{{
+            ingredient.ingredient.name
+          }}</a>
+        </td>
+        <td>
+          {{ ingredient.amount }}
+        </td>
+        <td>{{ ingredient.ingredient.unit }}</td>
+      </tr>
+    </table>
+  </div>
 </div>

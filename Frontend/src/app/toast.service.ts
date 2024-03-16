@@ -13,6 +13,7 @@ export class ToastService {
       message: message,
       type: type
     })
+    console.log(ToastType[this.toasts[0].type])
   }
 
   clearAll(): void {

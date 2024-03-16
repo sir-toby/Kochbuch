@@ -46,7 +46,7 @@ export class RecipeService {
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>(this.recipeUrl, recipe, this.httpOptions).pipe(
       tap((newRecipe: Recipe) => this.log(`added recipe w/ id=${newRecipe.id}`)),
-      tap(_ => this.toastService.addToast('Success', `Recipe ${_.name} successfully added`, this.toastType.Success)),
+      tap(_ => this.toastService.addToast('Success', `Recipe ${_.name} successfully added`, this.toastType.success)),
       catchError(this.handleError<Recipe>('addRecipe'))
     );
   }
@@ -59,7 +59,7 @@ export class RecipeService {
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
-      this.toastService.addToast('Failure', 'Recipe could not be created', this.toastType.Failure)
+      this.toastService.addToast('Failure', `${operation} failed with error ${error.message}`, this.toastType.failure)
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
