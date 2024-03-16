@@ -55,13 +55,18 @@
             />
           </td>
           <td>
-            <input
-              type="text"
-              class="form-control form-control-sm"
+            <select
+              class="form-select"
               id="ingredientUnit"
               [(ngModel)]="ingredient.ingredient.unit"
-              placeholder="Einheit"
-            />
+            >
+              <option
+                *ngFor="let unit of allowedUnits | keyvalue"
+                value="{{ unit.value }}"
+              >
+                {{ unit.value }}
+              </option>
+            </select>
           </td>
         </tr>
       </table>

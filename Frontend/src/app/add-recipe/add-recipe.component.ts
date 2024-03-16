@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { IngredientForRecipe } from '../ingredient-for-recipe';
+import { AllowedUnits } from '../ingredient';
 
 @Component({
   selector: 'app-add-recipe',
@@ -9,11 +10,13 @@ import { IngredientForRecipe } from '../ingredient-for-recipe';
   styleUrl: './add-recipe.component.css',
 
 })
+
 export class AddRecipeComponent implements OnInit {
   constructor(
     private recipeService: RecipeService) { }
 
   public recipe!: Recipe;
+  public allowedUnits = AllowedUnits;
 
   initializeRecipe(): void {
     this.recipe = {
@@ -43,10 +46,9 @@ export class AddRecipeComponent implements OnInit {
 
   addRecipe(): void {
     if (!this.recipe.name && !this.recipe.ingredients[0].ingredient.name) { return; }
-
-    console.log(this.recipe)
     this.recipeService.addRecipe(this.recipe).subscribe()
     this.initializeRecipe();
+
 
   }
 
