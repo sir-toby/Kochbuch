@@ -13,16 +13,22 @@
     --bs-toast-padding-x: 0.75rem;
     --bs-toast-padding-y: 0.5rem;
 }
-.failure {
-    --bs-toast-bg: rgba(255, 200, 200, 0.85);
-}
-.success {
-    --bs-toast-bg: rgba(200, 255, 200, 0.85);
+.FAILURE {
+    --bs-toast-bg: var(--bs-danger-bg-subtle);
+    --bs-toast-border-color: var(--bs-danger-border-subtle);
 }
 
-.warning {
-    --bs-toast-bg: rgba(255, 255, 200, 0.85);
+.SUCCESS {
+    --bs-toast-bg: var(--bs-success-bg-subtle);
+    --bs-toast-border-color: var(--bs-success-border-subtle);
 }
-.info {
-    --bs-toast-bg: rgba(200, 200, 255, 0.85);
+
+.WARNING {
+    --bs-toast-bg: var(--bs-warning-bg-subtle);
+    --bs-toast-border-color: var(--bs-warning-border-subtle);
+}
+.INFO {
+    --bs-toast-bg: var(--bs-primary-bg-subtle);
+    --bs-toast-border-color: var(--bs-primary-border-subtle);
+
 }

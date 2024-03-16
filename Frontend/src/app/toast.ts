@@ -5,8 +5,8 @@ export interface Toast {
 }
 
 export enum ToastType {
-    'success',
-    'warning',
-    'failure',
-    'info'
+    success = "SUCCESS",
+    warning = "WARNING",
+    failure = "FAILURE",
+    info = "INFO"
 }
